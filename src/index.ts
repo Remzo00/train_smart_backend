@@ -1,7 +1,11 @@
 import { HttpServer, port } from './adapters/inbound/http.server';
-import { config } from './infrastructure/config/config';
+import 'dotenv/config';
+import { config } from './database/config/config';
+
 
 config().then(() => {
+  console.log('Connected to the database');
+  console.log(HttpServer);
   HttpServer.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
   });
