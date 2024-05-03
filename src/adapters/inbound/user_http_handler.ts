@@ -1,7 +1,7 @@
 import express, { Router, Request, Response } from "express";
 import { IUserService } from "../../core/service/user_service";
 import { IHttpHandler } from "./http_handler";
-import { IUser } from "../../database/models/user_model";
+import { IUser } from "../../infrastructure/models/user_model";
 import { userSchema } from "./validations/user_validation";
 
 export class UserHttpHandler implements IHttpHandler{

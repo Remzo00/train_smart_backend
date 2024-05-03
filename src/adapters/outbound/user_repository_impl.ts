@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { IUserRepository } from "../../core/repository/user_repository";
-import { User, IUser } from "../../database/models/user_model";
+import { User, IUser } from "../../infrastructure/models/user_model";
 
 export class UserRepositoryImpl implements IUserRepository{
     private user: any

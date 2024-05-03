@@ -1,6 +1,6 @@
 import { HttpServer, port } from './adapters/inbound/http.server';
 import 'dotenv/config';
-import { config } from './database/config/config';
+import { config } from './infrastructure/config/config';
 
 
 config().then(() => {

@@ -1,4 +1,4 @@
-import { IUser } from "../../database/models/user_model";
+import { IUser } from "../../infrastructure/models/user_model";
 
 export interface IUserRepository{
     addUser(user: IUser): Promise<void> 

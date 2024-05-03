@@ -1,4 +1,4 @@
-import { IUser } from "../../database/models/user_model";
+import { IUser } from "../../infrastructure/models/user_model";
 import { IUserRepository } from "../repository/user_repository";
 import { IUserService } from "../service/user_service";
 

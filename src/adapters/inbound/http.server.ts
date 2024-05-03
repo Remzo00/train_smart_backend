@@ -5,7 +5,7 @@ import PinoHttp from 'pino-http';
 import { UserHttpHandler } from './user_http_handler';
 import { UserServiceImpl } from '../../core/application/user_service_impl';
 import { UserRepositoryImpl } from '../outbound/user_repository_impl';
-import { config } from '../../database/config/config';
+import { config } from '../../infrastructure/config/config';
 
 const HttpServer = express();
 const port = process.env.PORT || 5000;
