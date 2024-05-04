@@ -1,5 +1,5 @@
 import { IUser } from "../../infrastructure/models/user_model";
-import { IUserRepository } from "../repository/user_repository";
+import { IUserRepository } from "../ports/user_repository";
 import { IUserService } from "../service/user_service";
 
 export class UserServiceImpl implements IUserService{
@@ -26,5 +26,22 @@ export class UserServiceImpl implements IUserService{
         } catch(error){
             throw error
         }
-    }    
+    }
+    
+    async updateUser(user: IUser, userId: string): Promise<void> {
+        try{
+            await this.userRepository.updateUser(user, userId)
+            
+        } catch(error){
+            throw error
+        }
+    }
+
+    async deleteUserById(userId: string): Promise<void> {
+        try{
+            await this.userRepository.deleteUserById(userId)
+        } catch(error){
+            throw error
+        }
+    }
 }

@@ -5,7 +5,6 @@ import { config } from './infrastructure/config/config';
 
 config().then(() => {
   console.log('Connected to the database');
-  console.log(HttpServer);
   HttpServer.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
   });

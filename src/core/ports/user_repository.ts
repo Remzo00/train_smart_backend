@@ -1,6 +1,8 @@
 import { IUser } from "../../infrastructure/models/user_model";
 
 export interface IUserRepository{
-    addUser(user: IUser): Promise<void> 
     fetchUserById(userId: string): Promise<IUser>
+    addUser(user: IUser): Promise<void> 
+    updateUser(user: IUser, userId: string): Promise<void>
+    deleteUserById(userId: string): Promise<void>
 }
