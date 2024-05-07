@@ -1,4 +1,5 @@
 import { IUserRepository } from "../../core/ports/user_repository";
+import { ValidationException } from "../../exeptions/validationException";
 import { User, IUser } from "../../infrastructure/models/user_model";
 
 export class UserRepositoryImpl implements IUserRepository{
@@ -13,7 +14,7 @@ export class UserRepositoryImpl implements IUserRepository{
 
             return userObject
         } catch(error){
-            throw error
+            throw new ValidationException("User not found")
         }
     }
 
@@ -22,7 +23,7 @@ export class UserRepositoryImpl implements IUserRepository{
             const userObject = await this.user.findOne({ email })
             return userObject
         } catch(error){
-            throw error
+            throw new ValidationException("User email not found")
         }
     }
 
@@ -30,7 +31,7 @@ export class UserRepositoryImpl implements IUserRepository{
         try{
             await this.user.create(user)
         } catch(error){
-            throw new Error("Error adding user");
+            throw new ValidationException("Error adding user")
         }
     }
 
@@ -39,12 +40,12 @@ export class UserRepositoryImpl implements IUserRepository{
             const updatedUser = await this.user.findByIdAndUpdate(userId, user, { new: true })
 
             if(!updatedUser){
-                throw new Error("User not found");
+                throw new ValidationException("User for update not found")
             }
 
             return updatedUser
         } catch(error){
-            throw error
+            throw new ValidationException("User not found")
         }
     }
 
@@ -52,7 +53,7 @@ export class UserRepositoryImpl implements IUserRepository{
         try{
             await this.user.findByIdAndDelete(userId)
         } catch(error){
-            throw error
+            throw new ValidationException("Error deleting user")
         }
     }
 }

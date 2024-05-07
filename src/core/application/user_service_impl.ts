@@ -1,3 +1,5 @@
+import { UnauthorisedException } from "../../exeptions/unauthorisedException";
+import { ValidationException } from "../../exeptions/validationException";
 import { IUser } from "../../infrastructure/models/user_model";
 import { IUserRepository } from "../ports/user_repository";
 import { IUserService } from "../service/user_service";
@@ -15,7 +17,7 @@ export class UserServiceImpl implements IUserService{
         }
 
         if(!user){
-            throw new Error("User not found");
+            throw new UnauthorisedException("User not found");
         }
         return user
     }
@@ -24,7 +26,7 @@ export class UserServiceImpl implements IUserService{
         try{
             await this.userRepository.addUser(user)
         } catch(error){
-            throw error
+            throw new ValidationException("Error adding user")
         }
     }
     
@@ -33,7 +35,7 @@ export class UserServiceImpl implements IUserService{
             await this.userRepository.updateUser(user, userId)
             
         } catch(error){
-            throw error
+            throw new ValidationException("Error updating user"); 
         }
     }
 
@@ -41,7 +43,7 @@ export class UserServiceImpl implements IUserService{
         try{
             await this.userRepository.deleteUserById(userId)
         } catch(error){
-            throw error
+            throw new ValidationException("Error deleting user");
         }
     }
 }

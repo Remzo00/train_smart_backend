@@ -1,4 +1,6 @@
 import { CreateUserParams, UserSignInParams } from "../../adapters/types/user_types";
+import { UnauthorisedException } from "../../exeptions/unauthorisedException";
+import { ValidationException } from "../../exeptions/validationException";
 import { IUser, User } from "../../infrastructure/models/user_model";
 import { comparePassword, hashPassword } from "../../utils/hash_password";
 import { IUserRepository } from "../ports/user_repository";
@@ -11,12 +13,12 @@ export class AuthServiceImpl implements IAuthService{
         try{
             user = await this.userRepository.fetchUserByEmail(params.email)
         } catch(error){
-            throw new Error("UserNotFound");
+            throw new UnauthorisedException("User Not Found");
         }
 
         const isPasswordCorrect = await comparePassword(params.password, user.password)
         if(!isPasswordCorrect){
-            throw new Error("InvalidPassword")
+            throw new ValidationException("Invalid password");
         }
         
         return user
@@ -37,7 +39,7 @@ export class AuthServiceImpl implements IAuthService{
 
             await this.userRepository.addUser(newUser)
         } catch(error){
-            throw error
+            throw new ValidationException("Error creating user account")
         }
     }
 }
