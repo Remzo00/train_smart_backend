@@ -77,13 +77,10 @@ export class AuthHttHandler implements IHttpHandler{
         try{
             let token = "";
             const userParams: UserSignInParams = req.body
-            console.log("userParams", userParams)
             const user = await this.authService.authenticateUser(userParams)
-            console.log("user", user)
             if (user.id) {
                 try {
                     token = await this.jwtRepository.generateToken({ userId: user.id });
-                    console.log("token", token);
                 } catch (error) {
                     console.error("Error generating token:", error);
                 }

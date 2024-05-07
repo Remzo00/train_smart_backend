@@ -89,7 +89,6 @@ export class UserHttpHandler implements IHttpHandler{
     async addUser(req: Request, res: Response): Promise<void> {
         try {
             const { error, value } = createUserSchema.validate(req.body);
-            console.log(req.body)
     
             if (error) {
                 res.status(400).json({ message: "Invalid data provided.", error: error.details });
