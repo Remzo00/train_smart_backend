@@ -17,6 +17,15 @@ export class UserRepositoryImpl implements IUserRepository{
         }
     }
 
+    async fetchUserByEmail(email: string): Promise<IUser> {
+        try{
+            const userObject = await this.user.findOne({ email })
+            return userObject
+        } catch(error){
+            throw error
+        }
+    }
+
     async addUser(user: IUser): Promise<void> {
         try{
             await this.user.create(user)
