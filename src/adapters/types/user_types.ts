@@ -68,3 +68,13 @@ export interface UserSignInParams {
     weight: number;
     gender: string;
   }
+
+
+  export interface UpdateUserParams {
+    name: string;
+    surname: string;
+    email: string;
+    password: string;
+    weight: number;
+    gender: string;
+  }

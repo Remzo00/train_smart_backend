@@ -3,6 +3,7 @@ import { IUserService } from "../../core/service/user_service";
 import { IHttpHandler } from "./http_handler";
 import { IUser } from "../../infrastructure/models/user_model";
 import { createUserSchema, updateUserSchema } from "./validations/user_validation";
+import { UpdateUserParams } from "../types/user_types";
 
 export class UserHttpHandler implements IHttpHandler{
     constructor(private userService: IUserService){}
@@ -74,10 +75,9 @@ export class UserHttpHandler implements IHttpHandler{
  */
     async updateUser(req: Request, res: Response): Promise<void> {
         try {
-            const { error, value } = updateUserSchema.validate(req.body);
 
             const userId = req.params.userId; 
-            const userDataToUpdate: IUser = value;
+            const userDataToUpdate: UpdateUserParams = req.body;
             
             await this.userService.updateUser(userDataToUpdate, userId);
     
