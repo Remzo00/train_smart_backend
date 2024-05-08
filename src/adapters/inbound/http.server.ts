@@ -11,9 +11,8 @@ import { AuthHttHandler } from './auth_http_handler';
 import { MiddlewareFactory } from '../../infrastructure/middlewares/middlewareFactory';
 import 'dotenv/config';
 
-
-const HttpServer = express();
 const port = process.env.PORT || 5000;
+const swaggerServer: any[] = [];
 
 // Swagger definition
 const swaggerDefinition = {
@@ -22,25 +21,40 @@ const swaggerDefinition = {
     version: '1.0.0',
     description: 'train smart application',
   },
-  servers: [
-    {
+  servers: swaggerServer,
+  components:{
+    securitySchemes:{
+      BearerAuth:{
+        type: "http",
+        scheme: "bearer",
+        bearerFormat: "JWT"
+      },
+    },
       url: `http://localhost:${port}/v1`,
       description: 'Development server',
     },
-  ],
+
+    security:[
+      {
+        BearerAuth: []
+      },
+    ],
 };
 
-const specs = swaggerJsdoc({
+export const options = {
   swaggerDefinition,
   apis: ['./src/**/*.ts'],
-});
+}
+
+const specs = swaggerJsdoc(options);
 
 // Middlewares
 const pinoHttp = PinoHttp();
-HttpServer.use(pinoHttp);
-HttpServer.use(express.json());
+const HttpServer = express();
 
 HttpServer.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+HttpServer.use(pinoHttp);
+HttpServer.use(express.json());
 
 HttpServer.get('/healthcheck', (req, res) => {
   res.status(200).send({

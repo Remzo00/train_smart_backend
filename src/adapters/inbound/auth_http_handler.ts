@@ -19,23 +19,51 @@ export class AuthHttHandler implements IHttpHandler{
         return authRouter
     }
 
-    /**
-     * @swagger
-     * /register:
-     *   post:
-     *     summary: Register a new user
-     *     requestBody:
-     *       required: true
-     *       content:
-     *         application/json:
-     *           schema:
-     *             $ref: '#/definitions/CreateUserParams'
-     *     responses:
-     *       201:
-     *         description: User created successfully
-     *       400:
-     *         description: Failed to create user
-     */
+   /**
+   * @swagger
+   * /auth/register:
+   *   post:
+   *     summary: Sign up a new user
+   *     security: []
+   *     tags: [Auth]
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/CreateUserParams'
+   *     responses:
+   *       201:
+   *         description: User created successfully
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 message:
+   *                   type: string
+   *                   example: User created successfully
+   *       400:
+   *         description: Failed to create user
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 message:
+   *                   type: string
+   *                   example: Failed to create user
+   *       409:
+   *         description: Value violates unique constraint (e.g., duplicate email)
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 message:
+   *                   type: string
+   *                   example: Value violates unique constraint
+   */
     userSignUp = async (req: Request, res: Response): Promise<void> =>{
         try{
             const userParams: CreateUserParams = req.body
@@ -55,24 +83,54 @@ export class AuthHttHandler implements IHttpHandler{
     }
 
     /**
-     * @swagger
-     * /login:
-     *   post:
-     *     summary: Authenticate user and generate JWT token
-     *     requestBody:
-     *       required: true
-     *       content:
-     *         application/json:
-     *           schema:
-     *             $ref: '#/definitions/UserSignInParams'
-     *     responses:
-     *       200:
-     *         description: Authentication successful
-     *       401:
-     *         description: Authentication failed. Invalid credentials.
-     *       500:
-     *         description: Internal server error
-     */
+   * @swagger
+   * /auth/login:
+   *   post:
+   *     summary: Sign in a user
+   *     description: This endpoint authenticates a user by their credentials.
+   *     security: []
+   *     tags: [Auth]
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/UserSignInParams'
+   *     responses:
+   *       200:
+   *         description: Authentication successful
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 message:
+   *                   type: string
+   *                   example: Authentication successful
+   *                 token:
+   *                   type: string
+   *                   example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+   *       401:
+   *         description: Authentication failed due to invalid credentials
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 message:
+   *                   type: string
+   *                   example: Authentication failed. Invalid credentials.
+   *       500:
+   *         description: Internal server error
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 message:
+   *                   type: string
+   *                   example: Internal server error
+   */
     userSignIn = async (req: Request, res: Response): Promise<void> => {
         try{
             let token = "";

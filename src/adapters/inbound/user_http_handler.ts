@@ -9,7 +9,6 @@ export class UserHttpHandler implements IHttpHandler{
     registerRoutes(): Router {
         const userRouter = express.Router()
     
-        userRouter.post("/", this.addUser.bind(this));
         userRouter.get("/:userId", this.getUserById.bind(this));
         userRouter.patch("/:userId", this.updateUser.bind(this));
         userRouter.delete("/:userId", this.deleteUserById.bind(this));
@@ -47,61 +46,6 @@ export class UserHttpHandler implements IHttpHandler{
             res.json(user)
         } catch(error){
             res.status(500).json(error)
-        }
-    }
-
-/**
- * @swagger
- * /v1/users:
- *   post:
- *     summary: Create a new user
- *     description: Create a new user with the provided details.
- *     tags: [User]
- *     requestBody:
- *       required: true
- *     parameters:
- *       - in: body
- *         name: user
- *         description: The user to create.
- *         schema:
- *           type: object
- *           properties:
- *             name:
- *               type: string
- *             surname:
- *               type: string
- *             email:
- *               type: string
- *             password:
- *               type: string
- *             weight:
- *               type: number
- *             gender:
- *               type: string
- *     responses:
- *       201:
- *         description: Successfully created the user.
- *       400:
- *         description: Bad request, such as missing or invalid parameters.
- *       500:
- *         description: Internal server error.
- */
-    async addUser(req: Request, res: Response): Promise<void> {
-        try {
-            const { error, value } = createUserSchema.validate(req.body);
-    
-            if (error) {
-                res.status(400).json({ message: "Invalid data provided.", error: error.details });
-                return;
-            }
-    
-            const newUser: IUser = value;
-    
-            await this.userService.addUser(newUser);
-    
-            res.status(201).json({ message: "User successfully created." });
-        } catch (error) {
-            res.status(500).json({ message: "Error creating user.", error: error });
         }
     }
 
