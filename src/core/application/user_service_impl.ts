@@ -46,4 +46,19 @@ export class UserServiceImpl implements IUserService{
             throw new ValidationException("Error deleting user");
         }
     }
+
+    async addExerciseToUser(userId: string, exerciseName: string, maxWeight: number): Promise<void> {
+        try{
+            const user = await this.userRepository.fetchUserById(userId)
+
+            if(!user){
+                throw new ValidationException("User not found")
+            }
+
+            user.exercises.push({exerciseName, maxWeight})
+            await user.save()
+        } catch(error){
+            throw new ValidationException("Error adding exercise to user")
+        }
+    }
 }

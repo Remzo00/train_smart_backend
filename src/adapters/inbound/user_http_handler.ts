@@ -13,6 +13,7 @@ export class UserHttpHandler implements IHttpHandler{
         userRouter.get("/:userId", this.getUserById.bind(this));
         userRouter.patch("/:userId", this.updateUser.bind(this));
         userRouter.delete("/:userId", this.deleteUserById.bind(this));
+        userRouter.post("/:userId/exercises", this.addExerciseToUser.bind(this));
 
         return userRouter
     }
@@ -123,4 +124,18 @@ export class UserHttpHandler implements IHttpHandler{
             res.status(500).json(error)
         }
     }
+
+    async addExerciseToUser(req: Request, res: Response): Promise<void> {
+        try {
+            const userId = req.params.userId
+            const { exerciseName, maxWeight } = req.body;
+
+            await this.userService.addExerciseToUser(userId, exerciseName, maxWeight);            
+            
+            res.status(200).json({ message: "Exercise successfully added to user." });
+        } catch (error) {
+            res.status(500).json({ message: "Error calculating optimal weight.", error });
+        }
+    }
+
 }

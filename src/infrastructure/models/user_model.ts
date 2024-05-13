@@ -7,6 +7,10 @@ export interface IUser extends Document{
     password: string;
     weight: number;
     gender: string;
+    exercises: {
+        exerciseName: string;
+        maxWeight: number;
+    }[];
 }
 
 const UserSchema = new Schema({
@@ -39,7 +43,18 @@ const UserSchema = new Schema({
     gender:{
         type: String,
         require: true
-    }
+    },
+
+    exercises: [{
+        exerciseName: {
+            type: String,
+            require: true
+        },
+        maxWeight: {
+            type: Number,
+            require: true
+        }
+    }]
 })
 
 export const User = mongoose.model<IUser>('User', UserSchema)
