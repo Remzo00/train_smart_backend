@@ -21,7 +21,7 @@ export class AuthHttHandler implements IHttpHandler{
 
    /**
    * @swagger
-   * /auth/register:
+   * /v1/auth/register:
    *   post:
    *     summary: Sign up a new user
    *     security: []
@@ -84,7 +84,7 @@ export class AuthHttHandler implements IHttpHandler{
 
     /**
    * @swagger
-   * /auth/login:
+   * /v1/auth/login:
    *   post:
    *     summary: Sign in a user
    *     description: This endpoint authenticates a user by their credentials.
@@ -99,17 +99,6 @@ export class AuthHttHandler implements IHttpHandler{
    *     responses:
    *       200:
    *         description: Authentication successful
-   *         content:
-   *           application/json:
-   *             schema:
-   *               type: object
-   *               properties:
-   *                 message:
-   *                   type: string
-   *                   example: Authentication successful
-   *                 token:
-   *                   type: string
-   *                   example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
    *       401:
    *         description: Authentication failed due to invalid credentials
    *         content:

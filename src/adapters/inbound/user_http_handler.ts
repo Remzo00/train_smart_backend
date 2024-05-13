@@ -53,20 +53,20 @@ export class UserHttpHandler implements IHttpHandler{
 
     /**
  * @swagger
- * /v1/users/:userId:
+ * /v1/users/{userId}:
  *   patch:
  *     summary: Update the user
-*     description: Updates the details of an existing user. Only fields included in the request body will be updated.
+ *     description: Updates the details of an existing user. Only fields included in the request body will be updated.
  *     tags: [User]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/User'
+ *             $ref: '#/components/schemas/UpdateUserParams'
  *     responses:
  *       200:
- *         description: Successfully updated the user.
+ *         description: User updated successfully
  *       400:
  *         description: Bad request, such as missing or invalid parameters.
  *       404:

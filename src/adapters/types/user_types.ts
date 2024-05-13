@@ -27,7 +27,7 @@ export interface UserSignInParams {
  *   schemas:
  *     CreateUserParams:
  *       type: object
- *       parameters:
+ *       properties:
  *         name:
  *           type: string
  *           description: The full name of the user.
@@ -69,12 +69,40 @@ export interface UserSignInParams {
     gender: string;
   }
 
+  /**
+ * @swagger
+ * components:
+ *   schemas:
+ *     UpdateUserParams:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: The full name of the user.
+ *           example: Jane 
+ *         surname:
+ *           type: string
+ *           description: The surname of the user.
+ *           example: Doe
+ *         email:
+ *           type: string
+ *           description: The email address of the user.
+ *           example: johndoe@example.com
+ *         weight:
+ *           type: number
+ *           description: The weight of the user.
+ *           example: 70
+ *       required:
+ *         - name
+ *         - surname
+ *         - email
+ *         - weight
+ */
 
   export interface UpdateUserParams {
-    name: string;
-    surname: string;
-    email: string;
-    password: string;
-    weight: number;
-    gender: string;
+    name?: string;
+    surname?: string;
+    email?: string;
+    weight?: number;
+    gender?: string;
   }

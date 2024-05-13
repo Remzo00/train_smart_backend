@@ -16,6 +16,7 @@ const swaggerServer: any[] = [];
 
 // Swagger definition
 const swaggerDefinition = {
+  openapi: "3.0.0",
   info: {
     title: 'Express API with Swagger',
     version: '1.0.0',
