@@ -118,7 +118,7 @@ export class AuthHttHandler implements IHttpHandler{
    *               properties:
    *                 message:
    *                   type: string
-   *                   example: Internal server error
+   *                   example: Invalid credentials
    */
     userSignIn = async (req: Request, res: Response): Promise<void> => {
         try{
@@ -136,7 +136,7 @@ export class AuthHttHandler implements IHttpHandler{
             res.status(200).json({ message: "Authentication successful", token: token})
         } catch (error) {
             if (error instanceof Error) {
-              let message = "Internal server error";
+              let message = "Invalid credentials";
               let statusCode = 500;
       
               switch (error.message) {
