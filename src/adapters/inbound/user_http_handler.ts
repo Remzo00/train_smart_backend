@@ -1,8 +1,6 @@
 import express, { Router, Request, Response } from "express";
 import { IUserService } from "../../core/service/user_service";
 import { IHttpHandler } from "./http_handler";
-import { IUser } from "../../infrastructure/models/user_model";
-import { createUserSchema, updateUserSchema } from "./validations/user_validation";
 import { UpdateUserParams } from "../types/user_types";
 
 export class UserHttpHandler implements IHttpHandler{
@@ -143,7 +141,6 @@ export class UserHttpHandler implements IHttpHandler{
         try {
             const userId = req.params.userId
             const newPassword = req.body.password;
-            console.log(newPassword)
             
             await this.userService.changeUserPassword(userId, newPassword);
             
