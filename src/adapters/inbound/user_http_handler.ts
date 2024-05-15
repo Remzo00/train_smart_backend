@@ -33,7 +33,7 @@ export class UserHttpHandler implements IHttpHandler{
      *         description: ID of the user to retrieve.
      *     responses:
      *       200:
-     *         description: Successful operation. Returns the user object.
+     *         description: Successful operation.
      *       404:
      *         description: User not found.
      *       500:
