@@ -14,6 +14,7 @@ export class UserHttpHandler implements IHttpHandler{
         userRouter.patch("/:userId", this.updateUser.bind(this));
         userRouter.delete("/:userId", this.deleteUserById.bind(this));
         userRouter.post("/:userId/exercises", this.addExerciseToUser.bind(this));
+        userRouter.patch("/:userId/change-password", this.changeUserPassword.bind(this));
 
         return userRouter
     }
@@ -135,6 +136,20 @@ export class UserHttpHandler implements IHttpHandler{
             res.status(200).json({ message: "Exercise successfully added to user." });
         } catch (error) {
             res.status(500).json({ message: "Error calculating optimal weight.", error });
+        }
+    }
+
+    async changeUserPassword(req: Request, res: Response): Promise<void> {
+        try {
+            const userId = req.params.userId
+            const newPassword = req.body.password;
+            console.log(newPassword)
+            
+            await this.userService.changeUserPassword(userId, newPassword);
+            
+            res.status(200).json({ message: "Password successfully changed." });
+        } catch (error) {
+            res.status(500).json({ message: "Error changing password.", error });
         }
     }
 

@@ -61,4 +61,12 @@ export class UserServiceImpl implements IUserService{
             throw new ValidationException("Error adding exercise to user")
         }
     }
+
+    async changeUserPassword(userId: string, newPassword: string): Promise<void> {
+        try{
+            await this.userRepository.changeUserPassword(userId, newPassword)
+        } catch(error){
+            throw new ValidationException("Error changing user password")
+        }
+    }
 }

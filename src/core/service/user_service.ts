@@ -7,4 +7,5 @@ export interface IUserService {
     updateUser(user: UpdateUserParams, userId: string): Promise<void>
     deleteUserById(userId: string): Promise<void>
     addExerciseToUser(userId: string, exerciseName: string, maxWeight: number): Promise<void>
+    changeUserPassword(userId: string, newPassword: string): Promise<void>;
 }

@@ -1,6 +1,7 @@
 import { IUserRepository } from "../../core/ports/user_repository";
 import { ValidationException } from "../../exeptions/validationException";
 import { User, IUser } from "../../infrastructure/models/user_model";
+import { hashPassword } from "../../utils/hash_password";
 
 export class UserRepositoryImpl implements IUserRepository{
     private user: any
@@ -54,6 +55,24 @@ export class UserRepositoryImpl implements IUserRepository{
             await this.user.findByIdAndDelete(userId)
         } catch(error){
             throw new ValidationException("Error deleting user")
+        }
+    }
+
+    async changeUserPassword(userId: string, newPassword: string): Promise<void> {
+        try{
+            const user = await this.user.findById(userId)
+            if (!user) {
+                throw new ValidationException("User not found");
+            }
+
+            const hashedPassword = await hashPassword(newPassword);
+
+            user.password = hashedPassword
+
+            await user.save()
+            
+        } catch(error){
+            throw new ValidationException("Error changing user password")
         }
     }
 }
