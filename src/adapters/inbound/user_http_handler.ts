@@ -55,7 +55,7 @@ export class UserHttpHandler implements IHttpHandler{
  * /v1/users/{userId}:
  *   patch:
  *     summary: Update the user
- *     description: Updates the details of an existing user. Only fields included in the request body will be updated.
+ *     description: Updates the details of an existing user.
  *     tags: [User]
  *     requestBody:
  *       required: true
