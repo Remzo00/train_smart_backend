@@ -137,6 +137,56 @@ export class UserHttpHandler implements IHttpHandler{
         }
     }
 
+     /**
+   * @swagger
+   * /v1/users/{userId}/change-password:
+   *   patch:
+   *     summary: Change user's password
+   *     tags: [User]
+   *     description: Change the password of the user identified by the provided ID.
+   *     requestBody:
+   *       description: Object containing the new password.
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               password:
+   *                 type: string
+   *                 example: newpassword123
+   *     responses:
+   *       200:
+   *         description: Password changed successfully.
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 message:
+   *                   type: string
+   *                   example: Password changed successfully
+   *       400:
+   *         description: Bad request. Failed to change the password due to missing or invalid data.
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 message:
+   *                   type: string
+   *                   example: Failed to change password. Please provide a new password.
+   *       500:
+   *         description: Internal server error. Failed to change the password due to unexpected reasons.
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 message:
+   *                   type: string
+   *                   example: Failed to change password.
+   */
     async changeUserPassword(req: Request, res: Response): Promise<void> {
         try {
             const userId = req.params.userId
