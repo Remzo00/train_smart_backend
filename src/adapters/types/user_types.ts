@@ -4,7 +4,7 @@
  *   schemas:
  *     UserSignInParams:
  *       type: object
- *       parameters:
+ *       properties:
  *         email:
  *           type: string
  *           description: The email address of the user trying to sign in.
