@@ -1,6 +1,6 @@
 import { IUserRepository } from "../../core/ports/user_repository";
 import { ValidationException } from "../../exeptions/validationException";
-import { User, IUser } from "../../infrastructure/models/user_model";
+import { User, IUser } from "../../models/user_model";
 import { hashPassword } from "../../utils/hash_password";
 
 export class UserRepositoryImpl implements IUserRepository{

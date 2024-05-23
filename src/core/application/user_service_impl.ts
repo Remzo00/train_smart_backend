@@ -1,6 +1,6 @@
 import { UnauthorisedException } from "../../exeptions/unauthorisedException";
 import { ValidationException } from "../../exeptions/validationException";
-import { IUser } from "../../infrastructure/models/user_model";
+import { IUser } from "../../models/user_model";
 import { IUserRepository } from "../ports/user_repository";
 import { IUserService } from "../service/user_service";
 

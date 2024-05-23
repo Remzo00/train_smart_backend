@@ -1,7 +1,7 @@
 import { CreateUserParams, UserSignInParams } from "../../adapters/types/user_types";
 import { UnauthorisedException } from "../../exeptions/unauthorisedException";
 import { ValidationException } from "../../exeptions/validationException";
-import { IUser, User } from "../../infrastructure/models/user_model";
+import { IUser, User } from "../../models/user_model";
 import { comparePassword, hashPassword } from "../../utils/hash_password";
 import { IUserRepository } from "../ports/user_repository";
 import { IAuthService } from "../service/auth_service";
